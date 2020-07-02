@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "shipping-form"
+  "defaultProject": "shipping-form",
+  "cli": {
+    "analytics": false
+  }
 }
