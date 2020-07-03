@@ -51,19 +51,16 @@
           </section>
         </form>
       </mat-card-content>
-      <mat-card-actions>
-
-      </mat-card-actions>
     </mat-card>
   </section>
 
   <!--Shipping Address-->
   <section class="my-3 actions-box">
     <div class="my-2">
-      <mat-checkbox>My shipping address is same as my billing address.</mat-checkbox>
+      <mat-checkbox [(ngModel)]="isSameBilling">My shipping address is same as my billing address.</mat-checkbox>
     </div>
   </section>
-  <section>
+  <section *ngIf="!isSameBilling">
     <mat-card class="shipping-address">
       <mat-card-header>
         <mat-card-title>Billing Address</mat-card-title>
@@ -112,9 +109,6 @@
             </div>
         </form>
       </mat-card-content>
-      <mat-card-actions>
-
-      </mat-card-actions>
     </mat-card>
   </section>
 
@@ -150,9 +144,6 @@
           </div>
         </form>
       </mat-card-content>
-      <mat-card-actions>
-
-      </mat-card-actions>
     </mat-card>
   </section>
 </div>

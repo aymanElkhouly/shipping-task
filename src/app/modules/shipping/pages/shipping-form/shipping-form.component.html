@@ -1,7 +1,14 @@
 <delivery-navbar></delivery-navbar>
 
 <div class="content-box">
-  <app-delivery></app-delivery>
+  <router-outlet></router-outlet>
+  <div class="mt-5">
+    {{activeRoute}}
+  </div>
+  <div class="my-3">
+    <button mat-raised-button class="float-left" (click)="prevRoute()">Previous</button>
+    <button mat-raised-button class="float-right" color="primary" (click)="nexRoute()">Next</button>
+  </div>
 </div>
 
 

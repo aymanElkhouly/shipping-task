@@ -8,7 +8,7 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./delivery.component.scss']
 })
 export class DeliveryComponent implements OnInit {
-
+  isSameBilling = false;
   constructor() { }
 
   ngOnInit(): void {
