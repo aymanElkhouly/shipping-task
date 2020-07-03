@@ -1,150 +1,146 @@
-<div>
+<form autocomplete="off" novalidate>
   <!--Billing Address-->
-  <section>
+  <fieldset>
     <mat-card class="billing-address">
       <mat-card-header>
         <mat-card-title>Billing Address</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form class="example-form">
-          <section>
             <div>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>First Name*</mat-label>
-                <input matInput value="">
+                <input name="billingFirstName" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Last Name*</mat-label>
-                <input matInput value="">
+                <input name="billingLastName" matInput value="">
               </mat-form-field>
             </div>
             <div class="col-12">
               <mat-form-field class="w-100">
                 <mat-label>Address Line 1*</mat-label>
-                <input matInput value="">
+                <input name="billingAddress1" matInput value="">
               </mat-form-field>
             </div>
             <div class="col-12">
               <mat-form-field class="w-100">
                 <mat-label>Address Line 2</mat-label>
-                <input matInput value="">
+                <input name="billingAddress2" matInput value="">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>City/District*</mat-label>
-                <input matInput value="">
+                <input name="billingCity" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Province/State*</mat-label>
-                <input matInput value="">
+                <input name="billingState" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Country*</mat-label>
-                <input matInput value="">
+                <input name="billingCountry" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Postal Code*</mat-label>
-                <input matInput type="number" value="">
+                <input name="billingPostalCode" matInput type="number" value="">
               </mat-form-field>
             </div>
-          </section>
-        </form>
       </mat-card-content>
     </mat-card>
-  </section>
+  </fieldset>
 
   <!--Shipping Address-->
-  <section class="my-3 actions-box">
+  <fieldset class="my-3 actions-box">
     <div class="my-2">
-      <mat-checkbox [(ngModel)]="isSameBilling">My shipping address is same as my billing address.</mat-checkbox>
+      <mat-checkbox name="shippingIsSameBilling" [(ngModel)]="isSameBilling">My shipping address is same as my billing address.</mat-checkbox>
     </div>
-  </section>
-  <section *ngIf="!isSameBilling">
+  </fieldset>
+  <fieldset *ngIf="!isSameBilling">
     <mat-card class="shipping-address">
       <mat-card-header>
-        <mat-card-title>Billing Address</mat-card-title>
+        <mat-card-title>Shipping Address</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form class="example-form">
             <div>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>First Name*</mat-label>
-                <input matInput value="">
+                <input name="shippingFirstName" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Last Name*</mat-label>
-                <input matInput value="">
+                <input name="shippingLastName" matInput value="">
               </mat-form-field>
             </div>
             <div class="col-12">
               <mat-form-field class="w-100">
                 <mat-label>Address Line 1*</mat-label>
-                <input matInput value="">
+                <input name="shippingAddressLine1" matInput value="">
               </mat-form-field>
             </div>
             <div class="col-12">
               <mat-form-field class="w-100">
                 <mat-label>Address Line 2</mat-label>
-                <input matInput value="">
+                <input name="shippingAddressLine2" matInput value="">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>City/District*</mat-label>
-                <input matInput value="">
+                <input name="shippingCity" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Province/State*</mat-label>
-                <input matInput value="">
+                <input name="shippingState" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Country*</mat-label>
-                <input matInput value="">
+                <input name="shippingCountry" matInput value="">
               </mat-form-field>
               <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
                 <mat-label>Postal Code*</mat-label>
-                <input matInput type="number" value="">
+                <input name="shippingPostalCode" matInput type="number" value="">
               </mat-form-field>
             </div>
         </form>
       </mat-card-content>
     </mat-card>
-  </section>
+  </fieldset>
 
   <!--Account / Guest-->
-  <section class="my-3 actions-box">
+  <fieldset class="my-3 actions-box">
     <div>
       <mat-radio-group>
-        <mat-radio-button class="mr-2" value="new">Create Account</mat-radio-button>
-        <mat-radio-button value="guest">Checkout as a Guest</mat-radio-button>
+        <mat-radio-button name="accountCreate" class="mr-2" value="new">Create Account</mat-radio-button>
+        <mat-radio-button name="accountGuest" value="guest">Checkout as a Guest</mat-radio-button>
       </mat-radio-group>
     </div>
-  </section>
+  </fieldset>
 
-  <section>
+  <fieldset>
     <mat-card class="create-account">
       <mat-card-content>
         <form class="example-form">
             <div class="col-12">
               <mat-form-field class="w-100">
                 <mat-label>Email *</mat-label>
-                <input matInput type="email" value="">
+                <input name="accountEmail" matInput type="email" value="">
               </mat-form-field>
             </div>
           <div>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
               <mat-label>Password *</mat-label>
-              <input matInput value="">
+              <input name="accountPassword" matInput value="">
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
               <mat-label>Confirm Password*</mat-label>
-              <input matInput value="">
+              <input name="accountConfirmPassword" matInput value="">
             </mat-form-field>
           </div>
         </form>
       </mat-card-content>
     </mat-card>
-  </section>
-</div>
+  </fieldset>
+</form>
 
