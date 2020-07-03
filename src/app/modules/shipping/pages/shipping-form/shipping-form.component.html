@@ -2,12 +2,15 @@
 
 <div class="content-box">
   <router-outlet></router-outlet>
-  <div class="mt-5">
-    {{activeRoute}}
-  </div>
+ <!-- <div class="mt-5">
+    {{sharedRouteData['link']}}
+  </div>-->
   <div class="my-3">
-    <button mat-raised-button class="float-left" (click)="prevRoute()">Previous</button>
-    <button mat-raised-button class="float-right" color="primary" (click)="nexRoute()">Next</button>
+    <button mat-raised-button class="float-left" *ngIf="sharedRouteData['linkIndex']" (click)="prevRoute()">Previous</button>
+    <button mat-raised-button class="float-right" color="primary" (click)="nexRoute()">
+      <span *ngIf="sharedRouteData['linkIndex']+1 == links.length else nextTitle" >Save</span>
+      <ng-template #nextTitle>Next</ng-template>
+    </button>
   </div>
 </div>
 

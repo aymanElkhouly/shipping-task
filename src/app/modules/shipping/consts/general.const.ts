@@ -10,3 +10,10 @@ export const routerPaths = [
 ]
 
 
+export const linkData:object = {
+  link:routerPaths[0],
+  linkIndex:0
+}
+
+
+
