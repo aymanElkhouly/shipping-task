@@ -36,4 +36,8 @@ export class SharingDataService {
     this.onSubmitForm.next(name);
   }
 
+  resetForm(){
+    this.formDataObser.next(new FormData());
+  }
+
 }

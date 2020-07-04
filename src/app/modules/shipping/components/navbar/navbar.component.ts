@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
 
     // ** Listen to changes on form to check if data valid or not from other component over service **//
     this.sharingData.currentFormData.subscribe(formData=> {
-      this.isValidFormData = formData.isValid;
+      this.isValidFormData = formData.isValidForm;
     });
   }
 

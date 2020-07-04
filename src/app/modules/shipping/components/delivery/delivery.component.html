@@ -11,7 +11,6 @@
             <mat-label>First Name</mat-label>
             <input #billingFirstName="ngModel" matInput name="billingFirstName"
                    [(ngModel)]="formData.first_name" minlength="2" required>
-            <!--{{billingFirstName?.errors | json}}-->
             <mat-error *ngIf="(billingFirstName?.dirty || deliveryForm.submitted) && billingFirstName?.errors?.required">
               Field is required
             </mat-error>
@@ -111,7 +110,7 @@
   <!--Shipping Address-->
   <fieldset class="my-3 actions-box">
     <div class="my-2">
-      <mat-checkbox [(ngModel)]="formData.is_same_address"  name="shippingIsSameBilling">My shipping address is same as my billing
+      <mat-checkbox [(ngModel)]="formData.is_same_address" name="shippingIsSameBilling">My shipping address is same as my billing
         address.
       </mat-checkbox>
     </div>
@@ -228,8 +227,8 @@
   <fieldset class="my-3 actions-box">
     <div>
       <mat-radio-group name="createAccount" [(ngModel)]="formData.is_new_account" #createAccount="ngModel">
-        <mat-radio-button class="mr-2" name="accountCreate" [value]="0">Create Account</mat-radio-button>
-        <mat-radio-button name="accountGuest" [value]="1">Checkout as a Guest</mat-radio-button>
+        <mat-radio-button class="mr-2" name="accountCreate" [value]="false">Create Account</mat-radio-button>
+        <mat-radio-button name="accountGuest" [value]="true">Checkout as a Guest</mat-radio-button>
       </mat-radio-group>
     </div>
   </fieldset>

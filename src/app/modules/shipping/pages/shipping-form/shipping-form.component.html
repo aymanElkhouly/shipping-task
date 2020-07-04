@@ -1,7 +1,12 @@
 <delivery-navbar></delivery-navbar>
 
 <div class="content-box">
-  <router-outlet></router-outlet>
+  <div class="my-3">
+    <button mat-raised-button (click)="resetForm()">Reset</button>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
   <div class="my-3">
     <button mat-raised-button class="float-left" *ngIf="sharedRouteData['linkIndex']" (click)="prevRoute()">Previous</button>
     <button mat-raised-button class="float-right" color="primary" (click)="nexRoute()">

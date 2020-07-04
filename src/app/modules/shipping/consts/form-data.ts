@@ -8,7 +8,7 @@ export class FormData {
   state: string;
   country: string;
   postal_code: number;
-  is_same_address: number;
+  is_same_address: boolean;
   shipping_first_name: string;
   shipping_last_name: string;
   shipping_address_1: string;
@@ -17,7 +17,7 @@ export class FormData {
   shipping_state: string;
   shipping_country: string;
   shipping_postal_code: number;
-  is_new_account: number;
+  is_new_account: boolean;
   email: string;
   password: string;
   password_confirmation: string;
@@ -32,7 +32,7 @@ export class FormData {
     this.state = "";
     this.country = "";
     this.postal_code = null;
-    this.is_same_address = 1;
+    this.is_same_address = true;
     this.shipping_first_name = "";
     this.shipping_last_name = "";
     this.shipping_address_1 = "";
@@ -41,7 +41,7 @@ export class FormData {
     this.shipping_state = "";
     this.shipping_country = "";
     this.shipping_postal_code = null;
-    this.is_new_account = 0;
+    this.is_new_account = false;
     this.email = "";
     this.password = "";
     this.password_confirmation = "";
