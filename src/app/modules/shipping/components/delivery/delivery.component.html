@@ -252,7 +252,7 @@
           <div *ngIf="!formData.is_new_account">
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
               <mat-label>Password </mat-label>
-              <input matInput name="accountPassword" (input)="passwordMatcherValidator()" type="password" [(ngModel)]="formData.password"
+              <input matInput name="accountPassword"  type="password" [(ngModel)]="formData.password"
                      [pattern]="passwordPattern" #accountPassword="ngModel"  required>
               <mat-error *ngIf="(accountPassword?.dirty || deliveryForm.submitted)&& accountPassword?.errors?.required">
                 Field is required
@@ -264,7 +264,7 @@
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
               <mat-label>Confirm Password</mat-label>
-              <input matInput name="accountConfirmPassword" (input)="passwordMatcherValidator()" type="password" [(ngModel)]="formData.password_confirmation"
+              <input matInput name="accountConfirmPassword"  type="password" [(ngModel)]="formData.password_confirmation"
                      [pattern]="passwordPattern" #accountConfirmPassword="ngModel"  required>
               <mat-error *ngIf="(accountConfirmPassword?.dirty || deliveryForm.submitted)&& accountConfirmPassword?.errors?.required">
                 Field is required
@@ -282,8 +282,4 @@
   </fieldset>
 </form>
 
-<!--<div>{{deliveryForm.valid}}</div>
-<div>{{deliveryForm.submitted}}</div>
-
-<button mat-button (click)="submitForm()">Submit</button>-->
 

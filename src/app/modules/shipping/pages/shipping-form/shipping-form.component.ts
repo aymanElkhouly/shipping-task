@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
 import {SharingDataService} from '../../Services/sharing-data.service';
 import {ShippingService} from "../../Services/shipping.service";
 import {routerPaths} from "../../consts/general.const";
 import {linkData} from "../../consts/general.const";
+import { Subscription }   from 'rxjs';
+
 
 
 
@@ -13,26 +15,29 @@ import {linkData} from "../../consts/general.const";
   templateUrl: './shipping-form.component.html',
   styleUrls: ['./shipping-form.component.scss']
 })
-export class ShippingFormComponent implements OnInit {
+export class ShippingFormComponent implements OnInit,OnDestroy {
 
   sharedRouteData:object = linkData;
   links=routerPaths;
   linksLength = routerPaths.length;
   isValidForm:boolean = false;
   formData:object;
+  subscription: Subscription;
+
 
   constructor( private router:Router ,
                private sharingData:SharingDataService,
                private shippingService:ShippingService) {
   }
 
-  nexRoute(){
 
+
+  nexRoute(){
+    //** firing Shared data Service With RXJs To submit any child component form **//
     this.sharingData.submitForm(this.sharedRouteData["link"]);
 
-    if(this.sharedRouteData["linkIndex"] + 1 <= this.linksLength
-      && this.formData["isValidForm"]){
-
+    if(this.sharedRouteData["linkIndex"] + 1 < this.linksLength&& this.formData["isValidForm"]){
+     //** Get Next Route **//
       let nextRoute = this.links[this.sharedRouteData["linkIndex"] + 1];
 
       this.router.navigate([nextRoute]).then(()=>{
@@ -48,10 +53,8 @@ export class ShippingFormComponent implements OnInit {
       });
 
     }
-
     // ** Save Product in final Step **//
-    if(this.sharedRouteData["linkIndex"] + 1 == this.linksLength&&
-      this.formData["isValidForm"]){
+    if(this.sharedRouteData["linkIndex"] + 1 == this.linksLength && this.formData["isValidForm"]){
        this.saveProduct();
     }
 
@@ -69,9 +72,12 @@ export class ShippingFormComponent implements OnInit {
     }
   }
   saveProduct(){
-    this.shippingService.payProduct(this.formData).subscribe(
+  this.subscription = this.shippingService.payProduct(this.formData).subscribe(
       res=> console.log("response",res) ,
-      error => console.error(error)
+      error => console.error(error),
+      ()=>{
+        this.resetForm();
+      }
     )
   }
   resetForm(){
@@ -95,14 +101,19 @@ export class ShippingFormComponent implements OnInit {
   }
   ngOnInit(){
    //** using rxjs subject behavior with service to share data between component **//
-    this.sharingData.activeRoute.subscribe(link=> {
+   this.subscription = this.sharingData.activeRoute.subscribe(link=> {
       this.sharedRouteData = link;
     });
 
-    this.sharingData.currentFormData.subscribe(data=> {
+   this.subscription = this.sharingData.currentFormData.subscribe(data=> {
       this.isValidForm = data.isValidForm;
       this.formData = data;
     });
+  }
+
+  ngOnDestroy(): void {
+    // prevent memory leak when component destroyed
+    this.subscription.unsubscribe();
   }
 
 }

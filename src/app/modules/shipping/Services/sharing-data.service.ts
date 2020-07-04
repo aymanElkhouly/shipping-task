@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs'
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs'
 import {linkData} from "../consts/general.const";
 import {FormData} from "../consts/form-data";
 
@@ -11,7 +11,7 @@ export class SharingDataService {
 
   public formData = new FormData();
 
-  private routeLink =  new BehaviorSubject<any>(linkData);
+  private routeLink = new BehaviorSubject<any>(linkData);
   activeRoute = this.routeLink.asObservable();
 
   private formDataObser = new BehaviorSubject<any>(this.formData)
@@ -21,22 +21,22 @@ export class SharingDataService {
   submitFormComponent = this.onSubmitForm.asObservable();
 
 
+  constructor() {
+  }
 
-  constructor() { }
-
-  changeRouteLink(link:object){
+  changeRouteLink(link: object) {
     this.routeLink.next(link);
   }
 
-  setFormData(formData:any){
+  setFormData(formData: any) {
     this.formDataObser.next(formData);
   }
 
-  submitForm(name){
+  submitForm(name) {
     this.onSubmitForm.next(name);
   }
 
-  resetForm(){
+  resetForm() {
     this.formDataObser.next(new FormData());
   }
 

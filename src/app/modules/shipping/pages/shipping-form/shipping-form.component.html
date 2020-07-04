@@ -2,16 +2,26 @@
 
 <div class="content-box">
   <div class="my-3">
-    <button mat-raised-button (click)="resetForm()">Reset</button>
+    <button mat-raised-button (click)="resetForm()">
+      <span>Reset</span>
+      <mat-icon aria-hidden="false">clear</mat-icon>
+    </button>
   </div>
   <div>
     <router-outlet></router-outlet>
   </div>
   <div class="my-3">
-    <button mat-raised-button class="float-left" *ngIf="sharedRouteData['linkIndex']" (click)="prevRoute()">Previous</button>
+    <button mat-raised-button class="float-left" *ngIf="sharedRouteData['linkIndex']" (click)="prevRoute()">
+      <mat-icon aria-hidden="false">chevron_left</mat-icon>
+      <span>Previous</span>
+    </button>
     <button mat-raised-button class="float-right" color="primary" (click)="nexRoute()">
       <span *ngIf="sharedRouteData['linkIndex']+1 == links.length else nextTitle" >Pay</span>
-      <ng-template #nextTitle>Next</ng-template>
+      <mat-icon *ngIf="sharedRouteData['linkIndex']+1 == links.length" aria-hidden="false">credit_card</mat-icon>
+      <ng-template #nextTitle>
+        <span>Next</span>
+        <mat-icon aria-hidden="false">chevron_right</mat-icon>
+      </ng-template>
     </button>
   </div>
 </div>
