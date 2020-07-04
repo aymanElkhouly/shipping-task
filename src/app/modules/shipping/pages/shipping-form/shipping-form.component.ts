@@ -55,7 +55,7 @@ export class ShippingFormComponent implements OnInit {
       this.sharedRouteData = link;
     });
     this.sharingData.currentFormData.subscribe(formData=> {
-      this.isValidForm = formData.isValid;
+      this.isValidForm = formData.isValidForm;
     });
   }
 

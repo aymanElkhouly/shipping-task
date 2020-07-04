@@ -2,7 +2,7 @@
   <nav mat-tab-nav-bar mat-align-tabs="center">
     <a mat-tab-link [disabled]="!isValidFormData && idx >0" *ngFor="let link of links ;let idx = index"
        (click)="setActiveLink(link,idx)"
-       [active]="activeLink.link == link"> {{link}}
+       [active]="activeLink?.link == link"> {{link}}
     </a>
   </nav>
 </div>

@@ -10,7 +10,7 @@ export const routerPaths = [
 ]
 
 
-export const linkData:object = {
+export const linkData:any = {
   link:routerPaths[0],
   linkIndex:0
 }

@@ -9,25 +9,38 @@
         <div>
           <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
             <mat-label>First Name</mat-label>
-            <input #billingFirstName="ngModel" matInput name="billingFirstName" ngModel required>
+            <input #billingFirstName="ngModel" matInput name="billingFirstName"
+                   [(ngModel)]="formData.first_name" minlength="2" required>
+            <!--{{billingFirstName?.errors | json}}-->
             <mat-error *ngIf="(billingFirstName?.dirty || deliveryForm.submitted) && billingFirstName?.errors?.required">
               Field is required
+            </mat-error>
+            <mat-error *ngIf="(billingFirstName?.dirty || deliveryForm.submitted) && billingFirstName?.errors?.minlength">
+               2 character at least
             </mat-error>
           </mat-form-field>
           <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
             <mat-label>Last Name</mat-label>
-            <input #billingLastName="ngModel" matInput name="billingLastName" ngModel required>
+            <input #billingLastName="ngModel" matInput name="billingLastName"
+                   [(ngModel)]="formData.last_name" minlength="2" required>
             <mat-error *ngIf="(billingLastName?.dirty || deliveryForm.submitted)&& billingLastName?.errors?.required">
               Field is required
+            </mat-error>
+            <mat-error *ngIf="(billingLastName?.dirty || deliveryForm.submitted) && billingLastName?.errors?.minlength">
+              2 character at least
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col-12">
           <mat-form-field class="w-100">
             <mat-label>Address Line 1</mat-label>
-            <input matInput name="billingAddress1" ngModel #billingAddress1="ngModel" required>
+            <input matInput name="billingAddress1" [(ngModel)]="formData.address_1"
+                   #billingAddress1="ngModel" minlength="2" required>
             <mat-error *ngIf="(billingAddress1?.dirty || deliveryForm.submitted)&& billingAddress1?.errors?.required">
               Field is required
+            </mat-error>
+            <mat-error *ngIf="(billingAddress1?.dirty || deliveryForm.submitted) && billingAddress1?.errors?.minlength">
+              2 character at least
             </mat-error>
           </mat-form-field>
 
@@ -35,39 +48,59 @@
         <div class="col-12">
           <mat-form-field class="w-100">
             <mat-label>Address Line 2</mat-label>
-            <input matInput name="billingAddress2" >
+            <input [(ngModel)]="formData.address_2" matInput name="billingAddress2"
+                   #billingAddress2="ngModel" minlength="2">
+            <mat-error *ngIf="(billingAddress2?.dirty || deliveryForm.submitted) && billingAddress2?.errors?.minlength">
+              2 character at least
+            </mat-error>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
             <mat-label>City/District</mat-label>
-            <input matInput name="billingCity" ngModel #billingCity="ngModel" required >
+            <input matInput name="billingCity" [(ngModel)]="formData.city"
+                   #billingCity="ngModel" minlength="2" required >
             <mat-error *ngIf="(billingCity?.dirty || deliveryForm.submitted)&& billingCity?.errors?.required">
               Field is required
+            </mat-error>
+            <mat-error *ngIf="(billingCity?.dirty || deliveryForm.submitted) && billingCity?.errors?.minlength">
+              2 character at least
             </mat-error>
           </mat-form-field>
           <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
             <mat-label>Province/State</mat-label>
-            <input matInput name="billingState" ngModel #billingState="ngModel" required>
+            <input matInput name="billingState" [(ngModel)]="formData.state"
+                   #billingState="ngModel" minlength="2" required>
             <mat-error *ngIf="(billingState?.dirty || deliveryForm.submitted)&& billingState?.errors?.required">
               Field is required
+            </mat-error>
+            <mat-error *ngIf="(billingState?.dirty || deliveryForm.submitted) && billingState?.errors?.minlength">
+              2 character at least
             </mat-error>
           </mat-form-field>
           <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
             <mat-label>Country</mat-label>
-            <input matInput name="billingCountry" ngModel #billingCountry="ngModel" required>
+            <input matInput name="billingCountry" [(ngModel)]="formData.country"
+                   #billingCountry="ngModel" minlength="2" required>
             <mat-error *ngIf="(billingCountry?.dirty || deliveryForm.submitted)&& billingCountry?.errors?.required">
               Field is required
+            </mat-error>
+            <mat-error *ngIf="(billingCountry?.dirty || deliveryForm.submitted) && billingCountry?.errors?.minlength">
+              2 character at least
             </mat-error>
           </mat-form-field>
           <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
             <mat-label>Postal Code</mat-label>
-            <input matInput name="billingPostalCode" ngModel #billingPostalCode="ngModel" pattern="[0-9]+" required>
+            <input matInput name="billingPostalCode" [(ngModel)]="formData.postal_code"
+                   #billingPostalCode="ngModel" pattern="[0-9]+" minlength="3" maxlength="3" required>
             <mat-error *ngIf="(billingPostalCode?.dirty || deliveryForm.submitted)&& billingPostalCode?.errors?.required">
               Field is required
             </mat-error>
             <mat-error *ngIf="(billingPostalCode?.dirty || deliveryForm.submitted)&& billingPostalCode?.errors?.pattern">
               Numbers only
+            </mat-error>
+            <mat-error *ngIf="(billingPostalCode?.dirty || deliveryForm.submitted) && (billingPostalCode?.errors?.minlength || billingCountry?.errors?.maxlength )">
+              3 character required
             </mat-error>
           </mat-form-field>
         </div>
@@ -78,59 +111,115 @@
   <!--Shipping Address-->
   <fieldset class="my-3 actions-box">
     <div class="my-2">
-      <mat-checkbox [(ngModel)]="isSameBilling" name="shippingIsSameBilling">My shipping address is same as my billing
+      <mat-checkbox [(ngModel)]="formData.is_same_address"  name="shippingIsSameBilling">My shipping address is same as my billing
         address.
       </mat-checkbox>
     </div>
   </fieldset>
-  <fieldset *ngIf="!isSameBilling">
+  <fieldset *ngIf="!formData.is_same_address">
     <mat-card class="shipping-address">
       <mat-card-header>
         <mat-card-title>Shipping Address</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form class="example-form">
           <div>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>First Name*</mat-label>
-              <input matInput name="shippingFirstName" value="">
+              <mat-label>First Name</mat-label>
+              <input matInput name="shippingFirstName"
+                     [(ngModel)]="formData.shipping_first_name"
+                      #shippingFirstName="ngModel" minlength="2" required>
+              <mat-error *ngIf="(shippingFirstName?.dirty || deliveryForm.submitted)&& shippingFirstName?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(shippingFirstName?.dirty || deliveryForm.submitted) && shippingFirstName?.errors?.minlength">
+                2 character at least
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>Last Name*</mat-label>
-              <input matInput name="shippingLastName" value="">
+              <mat-label>Last Name</mat-label>
+              <input matInput name="shippingLastName"
+                     [(ngModel)]="formData.shipping_last_name" minlength="2" #shippingLastName="ngModel" required>
+              <mat-error *ngIf="(shippingLastName?.dirty || deliveryForm.submitted)&& shippingLastName?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(shippingLastName?.dirty || deliveryForm.submitted) && shippingLastName?.errors?.minlength">
+                2 character at least
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-12">
             <mat-form-field class="w-100">
-              <mat-label>Address Line 1*</mat-label>
-              <input matInput name="shippingAddressLine1" value="">
+              <mat-label>Address Line 1</mat-label>
+              <input matInput name="shippingAddressLine1" [(ngModel)]="formData.shipping_address_1"
+                      #shippingAddressLine1="ngModel" minlength="2" required>
+
+              <mat-error *ngIf="(shippingAddressLine1?.dirty || deliveryForm.submitted)&& shippingAddressLine1?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(shippingAddressLine1?.dirty || deliveryForm.submitted) && shippingAddressLine1?.errors?.minlength">
+                2 character at least
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-12">
             <mat-form-field class="w-100">
               <mat-label>Address Line 2</mat-label>
-              <input matInput name="shippingAddressLine2" value="">
+              <input matInput name="shippingAddressLine2" [(ngModel)]="formData.shipping_address_2"
+                     minlength="2" #shippingAddressLine2="ngModel">
+              <mat-error *ngIf="(shippingAddressLine2?.dirty || deliveryForm.submitted) && shippingAddressLine2?.errors?.minlength">
+                2 character at least
+              </mat-error>
             </mat-form-field>
           </div>
           <div>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>City/District*</mat-label>
-              <input matInput name="shippingCity" value="">
+              <mat-label>City/District</mat-label>
+              <input matInput name="shippingCity" [(ngModel)]="formData.shipping_city"
+                     #shippingCity="ngModel" minlength="2" required>
+              <mat-error *ngIf="(shippingCity?.dirty || deliveryForm.submitted)&& shippingCity?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(shippingCity?.dirty || deliveryForm.submitted) && shippingCity?.errors?.minlength">
+                2 character at least
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>Province/State*</mat-label>
-              <input matInput name="shippingState" value="">
+              <mat-label>Province/State</mat-label>
+              <input matInput name="shippingState"  [(ngModel)]="formData.shipping_state"
+                     #shippingState="ngModel" minlength="2" required>
+              <mat-error *ngIf="(shippingState?.dirty || deliveryForm.submitted)&& shippingState?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(shippingState?.dirty || deliveryForm.submitted) && shippingState?.errors?.minlength">
+                2 character at least
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>Country*</mat-label>
-              <input matInput name="shippingCountry" value="">
+              <mat-label>Country</mat-label>
+              <input matInput name="shippingCountry" [(ngModel)]="formData.shipping_country"
+                     #shippingCountry="ngModel" minlength="2" required>
+              <mat-error *ngIf="(shippingCountry?.dirty || deliveryForm.submitted)&& shippingCountry?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(shippingCountry?.dirty || deliveryForm.submitted) && shippingCountry?.errors?.minlength">
+                2 character at least
+              </mat-error>
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>Postal Code*</mat-label>
-              <input matInput name="shippingPostalCode" type="number" value="">
+              <mat-label>Postal Code</mat-label>
+              <input matInput name="shippingPostalCode" pattern="[0-9]+" [(ngModel)]="formData.shipping_postal_code"
+                      #shippingPostalCode="ngModel" minlength="2" maxlength="3"  required>
+              <mat-error *ngIf="(shippingPostalCode?.dirty || deliveryForm.submitted)&& shippingPostalCode?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(shippingPostalCode?.dirty || deliveryForm.submitted)&& shippingPostalCode?.errors?.pattern">
+                Numbers only
+              </mat-error>
+              <mat-error *ngIf="(shippingPostalCode?.dirty || deliveryForm.submitted) && (shippingPostalCode?.errors?.minlength || billingCountry?.errors?.maxlength )">
+                3 character required
+              </mat-error>
             </mat-form-field>
           </div>
-        </form>
       </mat-card-content>
     </mat-card>
   </fieldset>
@@ -138,9 +227,9 @@
   <!--Account / Guest-->
   <fieldset class="my-3 actions-box">
     <div>
-      <mat-radio-group>
-        <mat-radio-button class="mr-2" name="accountCreate" value="new">Create Account</mat-radio-button>
-        <mat-radio-button name="accountGuest" value="guest">Checkout as a Guest</mat-radio-button>
+      <mat-radio-group name="createAccount" [(ngModel)]="formData.is_new_account" #createAccount="ngModel">
+        <mat-radio-button class="mr-2" name="accountCreate" [value]="0">Create Account</mat-radio-button>
+        <mat-radio-button name="accountGuest" [value]="1">Checkout as a Guest</mat-radio-button>
       </mat-radio-group>
     </div>
   </fieldset>
@@ -148,30 +237,54 @@
   <fieldset>
     <mat-card class="create-account">
       <mat-card-content>
-        <form class="example-form">
           <div class="col-12">
             <mat-form-field class="w-100">
-              <mat-label>Email *</mat-label>
-              <input matInput name="accountEmail" type="email" value="">
+              <mat-label>Email </mat-label>
+              <input matInput name="accountEmail" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" [(ngModel)]="formData.email"
+                     #accountEmail="ngModel" required>
+              <mat-error *ngIf="(accountEmail?.dirty || deliveryForm.submitted)&& accountEmail?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(accountEmail?.dirty || deliveryForm.submitted)&& accountEmail?.errors?.pattern">
+                Invalid format
+              </mat-error>
             </mat-form-field>
           </div>
-          <div>
+          <div *ngIf="!formData.is_new_account">
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>Password *</mat-label>
-              <input matInput name="accountPassword" value="">
+              <mat-label>Password </mat-label>
+              <input matInput name="accountPassword" (input)="passwordMatcherValidator()" type="password" [(ngModel)]="formData.password"
+                     [pattern]="passwordPattern" #accountPassword="ngModel"  required>
+              <mat-error *ngIf="(accountPassword?.dirty || deliveryForm.submitted)&& accountPassword?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(accountPassword?.dirty || deliveryForm.submitted)&& accountPassword?.errors?.pattern">
+                Invalid password format
+              </mat-error>
+
             </mat-form-field>
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
-              <mat-label>Confirm Password*</mat-label>
-              <input matInput name="accountConfirmPassword" value="">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput name="accountConfirmPassword" (input)="passwordMatcherValidator()" type="password" [(ngModel)]="formData.password_confirmation"
+                     [pattern]="passwordPattern" #accountConfirmPassword="ngModel"  required>
+              <mat-error *ngIf="(accountConfirmPassword?.dirty || deliveryForm.submitted)&& accountConfirmPassword?.errors?.required">
+                Field is required
+              </mat-error>
+              <mat-error *ngIf="(accountConfirmPassword?.dirty || deliveryForm.submitted)&& accountConfirmPassword?.errors?.pattern">
+                Invalid password format
+              </mat-error>
+              <mat-error *ngIf="(accountPassword?.dirty || deliveryForm.submitted)&& (formData.password !== formData.password_confirmation)">
+                Passwords must match
+              </mat-error>
             </mat-form-field>
           </div>
-        </form>
       </mat-card-content>
     </mat-card>
   </fieldset>
 </form>
-<div>{{deliveryForm.valid}}</div>
+
+<!--<div>{{deliveryForm.valid}}</div>
 <div>{{deliveryForm.submitted}}</div>
 
-<button mat-button (click)="submitForm()">Submit</button>
+<button mat-button (click)="submitForm()">Submit</button>-->
 

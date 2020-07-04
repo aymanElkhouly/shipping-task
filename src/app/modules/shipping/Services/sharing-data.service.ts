@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs'
 import {linkData} from "../consts/general.const";
+import {FormData} from "../consts/form-data";
 
 
 @Injectable({
@@ -8,12 +9,13 @@ import {linkData} from "../consts/general.const";
 })
 export class SharingDataService {
 
+  public formData = new FormData();
 
   private routeLink =  new BehaviorSubject<any>(linkData);
   activeRoute = this.routeLink.asObservable();
 
-  private formData = new BehaviorSubject<any>({isValid:false})
-  currentFormData = this.formData.asObservable();
+  private formDataObser = new BehaviorSubject<any>(this.formData)
+  currentFormData = this.formDataObser.asObservable();
 
   private onSubmitForm = new BehaviorSubject<string>("")
   submitFormComponent = this.onSubmitForm.asObservable();
@@ -27,7 +29,7 @@ export class SharingDataService {
   }
 
   setFormData(formData:any){
-    this.formData.next(formData);
+    this.formDataObser.next(formData);
   }
 
   submitForm(name){
