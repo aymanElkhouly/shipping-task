@@ -5,8 +5,8 @@
   <div class="my-3">
     <button mat-raised-button class="float-left" *ngIf="sharedRouteData['linkIndex']" (click)="prevRoute()">Previous</button>
     <button mat-raised-button class="float-right" color="primary" (click)="nexRoute()">
-      <span *ngIf="sharedRouteData['linkIndex']+1 == links.length else nextTitle" >Save</span>
-      <ng-template #nextTitle>Pay</ng-template>
+      <span *ngIf="sharedRouteData['linkIndex']+1 == links.length else nextTitle" >Pay</span>
+      <ng-template #nextTitle>Next</ng-template>
     </button>
   </div>
 </div>

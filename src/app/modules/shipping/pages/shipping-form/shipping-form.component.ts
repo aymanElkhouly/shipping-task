@@ -17,16 +17,21 @@ export class ShippingFormComponent implements OnInit {
   sharedRouteData:object = linkData;
   links=routerPaths;
   linksLength = routerPaths.length;
+  isValidForm:boolean = false;
 
   constructor( private router:Router , private sharingData:SharingDataService) {
 
   }
 
   nexRoute(){
-    if(this.sharedRouteData["linkIndex"] + 1 <= this.linksLength){
+
+    this.sharingData.submitForm(this.sharedRouteData["link"]);
+
+    if(this.sharedRouteData["linkIndex"] + 1 <= this.linksLength && this.isValidForm){
       let nextRoute = this.links[this.sharedRouteData["linkIndex"] + 1];
       this.router.navigate([nextRoute]).then(()=>{
         this.sharedRouteData["linkIndex"] ++;
+        this.sharingData.submitForm(null);
         this.setActiveLinkData(nextRoute);
       })
     }
@@ -48,6 +53,9 @@ export class ShippingFormComponent implements OnInit {
   ngOnInit(){
     this.sharingData.activeRoute.subscribe(link=> {
       this.sharedRouteData = link;
+    });
+    this.sharingData.currentFormData.subscribe(formData=> {
+      this.isValidForm = formData.isValid;
     });
   }
 

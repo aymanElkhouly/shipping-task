@@ -1,8 +1,7 @@
 <div class="tabs-container">
   <nav mat-tab-nav-bar mat-align-tabs="center">
-    <a mat-tab-link *ngFor="let link of links ;let idx = index"
+    <a mat-tab-link [disabled]="!isValidFormData && idx >0" *ngFor="let link of links ;let idx = index"
        (click)="setActiveLink(link,idx)"
-       [routerLink]="['/'+link]"
        [active]="activeLink.link == link"> {{link}}
     </a>
   </nav>
