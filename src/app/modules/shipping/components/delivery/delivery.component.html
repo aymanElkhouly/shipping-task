@@ -111,7 +111,7 @@
   <fieldset class="my-3 actions-box">
     <div class="my-2">
       <mat-checkbox [(ngModel)]="formData.is_same_address" name="shippingIsSameBilling">
-        <p class="text-wrap">My shipping address is same as my billing address.</p>
+        <p class="text-wrap my-0">My shipping address is same as my billing address.</p>
       </mat-checkbox>
     </div>
   </fieldset>
@@ -252,7 +252,7 @@
           <div *ngIf="!formData.is_new_account">
             <mat-form-field class="col-sm-12 col-md-6 col-lg-3">
               <mat-label>Password </mat-label>
-              <input #accountPassword="ngModel" (input)="passWordValidator()" [(ngModel)]="formData.password"  [pattern]="passwordPattern" matInput
+              <input #accountPassword="ngModel" (keyup)="passWordValidator()" [(ngModel)]="formData.password"  [pattern]="passwordPattern" matInput
                      name="accountPassword" required  type="password">
               <mat-error *ngIf="(accountPassword?.dirty || deliveryForm.submitted)&& accountPassword?.errors?.required">
                 Field is required
@@ -272,9 +272,6 @@
               <mat-error *ngIf="(accountConfirmPassword?.dirty || deliveryForm.submitted)&& accountConfirmPassword?.errors?.pattern">
                 Invalid password format
               </mat-error>
-              <!--<mat-error *ngIf="(accountConfirmPassword?.dirty || deliveryForm.submitted)&& (formData.password !== formData.password_confirmation)">
-                Passwords must match
-              </mat-error>-->
               <mat-error *ngIf="(accountConfirmPassword?.dirty || deliveryForm.submitted)&& (accountConfirmPassword?.errors?.passworderror == true)">
                 <span>Passwords must match</span>
               </mat-error>

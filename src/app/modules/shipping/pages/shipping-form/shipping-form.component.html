@@ -16,8 +16,11 @@
       <span>Previous</span>
     </button>
     <button mat-raised-button class="float-right" color="primary" (click)="nexRoute()">
-      <span *ngIf="sharedRouteData['linkIndex']+1 == links.length else nextTitle" >Pay</span>
+
+      <span class="mr-1" *ngIf="sharedRouteData['linkIndex']+1 == links.length else nextTitle" >Pay</span>
+
       <mat-icon *ngIf="sharedRouteData['linkIndex']+1 == links.length" aria-hidden="false">credit_card</mat-icon>
+
       <ng-template #nextTitle>
         <span>Next</span>
         <mat-icon aria-hidden="false">chevron_right</mat-icon>
