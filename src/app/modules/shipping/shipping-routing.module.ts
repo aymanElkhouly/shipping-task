@@ -15,7 +15,6 @@ const routes: Routes = [
       { path: routerLinks.shipping, component: ShippingComponent},
       { path: routerLinks.payment, component: PaymentComponent},
       { path: '', redirectTo: routerLinks.indexRoute,pathMatch: 'full'},
-      /*{ path: '**', component: DeliveryComponent },*/
       { path: '**', redirectTo: routerLinks.indexRoute,pathMatch: 'full' },
     ]
   }
