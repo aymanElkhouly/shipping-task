@@ -20,6 +20,8 @@ export class SharingDataService {
   private onSubmitForm = new BehaviorSubject<string>("")
   submitFormComponent = this.onSubmitForm.asObservable();
 
+  private resetFormSubj = new BehaviorSubject<any>("")
+  resetFormObserv = this.resetFormSubj.asObservable();
 
   constructor() {
   }
@@ -36,7 +38,8 @@ export class SharingDataService {
     this.onSubmitForm.next(name);
   }
 
-  resetForm() {
+  resetForm(state) {
+    this.resetFormSubj.next(state);
     this.formDataObser.next(new FormData());
   }
 

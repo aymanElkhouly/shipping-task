@@ -21,15 +21,36 @@ export class DeliveryComponent implements OnInit, AfterViewInit, OnDestroy {
     this.passwordPattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}";
   }
 
+  passWordValidator(){
+    if(this.formData.password !== this.formData.password_confirmation){
+      //** set custom error to form control **//
+      this.form.controls.accountConfirmPassword.setErrors({passworderror:true});
+    }
+    else if (this.formData.password === this.formData.password_confirmation){
+      //** remove password error & update form control validation **//
+      this.form.controls.accountConfirmPassword.setErrors({});
+      this.form.controls.accountConfirmPassword.clearValidators();
+      this.form.controls.accountConfirmPassword.updateValueAndValidity();
+    }
+  }
+
   submitForm() {
     this.form.onSubmit(null);
     this.formData.isValidForm = this.form.valid;
     this.sharingData.setFormData(this.formData);
   }
 
+  resetForm(){
+    //** reset Hole Form & Set some formControls to Initial Value **//
+    let defaultFormControls = {
+      createAccount: false,
+      shippingIsSameBilling: true,
+    }
+    this.form.resetForm(defaultFormControls);
+  }
+
 
   ngOnInit(): void {
-    //console.log("formDataOnInit",this.formData);
   }
 
   ngAfterViewInit(): void {
@@ -46,6 +67,15 @@ export class DeliveryComponent implements OnInit, AfterViewInit, OnDestroy {
           this.submitForm();
         }
       });
+
+      //** using rxjs subject behavior with service to able ReSetForm  from outside (Parent) **//
+      this.subscription = this.sharingData.resetFormObserv.subscribe(state => {
+        if (state) {
+          this.resetForm();
+        }
+      });
+
+
     }, 100)
 
   }
